@@ -4,13 +4,17 @@ $nama = $email = $nim = $jurusan = $alasan = "";
 $namaErr = $emailErr = $nimErr = $jurusanErr = $alasanErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // **********************  1  **************************
     // Tangkap nilai nama dari form
+    // silakan taruh kode kalian di bawah
     $nama = trim($_POST["nama"]);
     if (empty($nama)) {
         $namaErr = "Nama wajib diisi";
     }
 
+    // **********************  2  **************************
     // Tangkap nilai email dari form
+    // silakan taruh kode kalian di bawah
     $email = trim($_POST["email"]);
     if (empty($email)) {
         $emailErr = "Email wajib diisi";
@@ -18,7 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailErr = "Email tidak valid";
     }
 
+    // **********************  3  **************************
     // Tangkap nilai NIM dari form
+    // silakan taruh kode kalian di bawah
     $nim = trim($_POST["nim"]);
     if (empty($nim)) {
         $nimErr = "NIM wajib diisi";
@@ -26,13 +32,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nimErr = "NIM harus berupa angka";
     }
 
+    // **********************  4  **************************
     // Tangkap nilai jurusan (dropdown)
+    // silakan taruh kode kalian di bawah
     $jurusan = $_POST["jurusan"];
     if (empty($jurusan)) {
         $jurusanErr = "Jurusan wajib dipilih";
     }
 
+    // **********************  5  **************************
     // Tangkap nilai alasan (textarea)
+    // silakan taruh kode kalian di bawah
     $alasan = trim($_POST["alasan"]);
     if (empty($alasan)) {
         $alasanErr = "Alasan bergabung wajib diisi";
@@ -44,188 +54,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Pendaftaran Keanggotaan Lab - EAD Laboratory</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .form-container {
-      background: white;
-      border-radius: 12px;
-      padding: 30px;
-      max-width: 600px;
-      width: 100%;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .logo {
-      display: block;
-      margin: 0 auto 20px;
-      max-width: 150px;
-      height: auto;
-    }
-
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 30px;
-      font-size: 24px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #333;
-      font-weight: 500;
-      font-size: 14px;
-    }
-
-    input[type="text"],
-    select,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 5px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-      transition: border-color 0.3s;
-    }
-
-    input[type="text"]:focus,
-    select:focus,
-    textarea:focus {
-      outline: none;
-      border-color: #667eea;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .error {
-      color: #e74c3c;
-      font-size: 12px;
-      display: block;
-      margin-bottom: 15px;
-      min-height: 18px;
-    }
-
-    button[type="submit"] {
-      width: 100%;
-      padding: 14px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-top: 10px;
-    }
-
-    button[type="submit"]:hover {
-      background: #218838;
-    }
-
-    .success-box {
-      margin-top: 30px;
-      padding: 25px;
-      background: #d4edda;
-      border: 1px solid #c3e6cb;
-      border-radius: 8px;
-    }
-
-    .success-box .logo {
-      max-width: 80px;
-      margin-bottom: 15px;
-    }
-
-    .success-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #155724;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    .data-item {
-      display: flex;
-      padding: 12px 0;
-      border-bottom: 1px solid #c3e6cb;
-    }
-
-    .data-item:last-child {
-      border-bottom: none;
-    }
-
-    .data-label {
-      font-weight: 600;
-      color: #333;
-      min-width: 150px;
-    }
-
-    .data-value {
-      color: #555;
-      flex: 1;
-    }
-
-    select {
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      .form-container {
-        padding: 20px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      .data-item {
-        flex-direction: column;
-      }
-
-      .data-label {
-        margin-bottom: 5px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="form-container">
   <img src="EAD.png" alt="Logo EAD" class="logo">
   <h2>Form Pendaftaran Keanggotaan Lab - EAD Laboratory</h2>
-  
   <form method="post" action="">
     <label>Nama:</label>
-    <input type="text" name="nama" value="<?php echo htmlspecialchars($nama); ?>">
+    <input type="text" name="nama" value="<?php echo $nama; ?>">
     <span class="error"><?php echo $namaErr; ?></span>
 
     <label>Email:</label>
-    <input type="text" name="email" value="<?php echo htmlspecialchars($email); ?>">
+    <input type="text" name="email" value="<?php echo $email; ?>">
     <span class="error"><?php echo $emailErr; ?></span>
 
     <label>NIM:</label>
-    <input type="text" name="nim" value="<?php echo htmlspecialchars($nim); ?>">
+    <input type="text" name="nim" value="<?php echo $nim; ?>">
     <span class="error"><?php echo $nimErr; ?></span>
 
     <label>Jurusan:</label>
@@ -238,44 +84,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <span class="error"><?php echo $jurusanErr; ?></span>
 
     <label>Alasan Bergabung:</label>
-    <textarea name="alasan"><?php echo htmlspecialchars($alasan); ?></textarea>
+    <textarea name="alasan"><?php echo $alasan; ?></textarea>
     <span class="error"><?php echo $alasanErr; ?></span>
 
     <button type="submit">Daftar</button>
   </form>
 
   <?php
-  // Tampilkan hasil input jika semua valid
+  // **********************  6  **************************
+  // Tampilkan hasil input dalam tabel + logo di atasnya jika semua valid
+  // silakan taruh kode kalian di bawah
+  
   if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($namaErr) && empty($emailErr) && empty($nimErr) && empty($jurusanErr) && empty($alasanErr)) {
-      echo '<div class="success-box">';
+      echo '<div class="success-message">';
+      echo '<p style="color: green; font-weight: bold; text-align: center;">Data Pendaftaran Berhasil!</p>';
       echo '<img src="EAD.png" alt="Logo EAD" class="logo">';
-      echo '<div class="success-title">Data Pendaftaran Berhasil</div>';
-      
-      echo '<div class="data-item">';
-      echo '<div class="data-label">Nama</div>';
-      echo '<div class="data-value">: ' . htmlspecialchars($nama) . '</div>';
-      echo '</div>';
-      
-      echo '<div class="data-item">';
-      echo '<div class="data-label">Email</div>';
-      echo '<div class="data-value">: ' . htmlspecialchars($email) . '</div>';
-      echo '</div>';
-      
-      echo '<div class="data-item">';
-      echo '<div class="data-label">NIM</div>';
-      echo '<div class="data-value">: ' . htmlspecialchars($nim) . '</div>';
-      echo '</div>';
-      
-      echo '<div class="data-item">';
-      echo '<div class="data-label">Jurusan</div>';
-      echo '<div class="data-value">: ' . htmlspecialchars($jurusan) . '</div>';
-      echo '</div>';
-      
-      echo '<div class="data-item">';
-      echo '<div class="data-label">Alasan Bergabung</div>';
-      echo '<div class="data-value">: ' . htmlspecialchars($alasan) . '</div>';
-      echo '</div>';
-      
+      echo '<h3>Data Pendaftaran</h3>';
+      echo '<table>';
+      echo '<tr><th>Field</th><th>Informasi</th></tr>';
+      echo '<tr><td>Nama</td><td>' . htmlspecialchars($nama) . '</td></tr>';
+      echo '<tr><td>Email</td><td>' . htmlspecialchars($email) . '</td></tr>';
+      echo '<tr><td>NIM</td><td>' . htmlspecialchars($nim) . '</td></tr>';
+      echo '<tr><td>Jurusan</td><td>' . htmlspecialchars($jurusan) . '</td></tr>';
+      echo '<tr><td>Alasan Bergabung</td><td>' . htmlspecialchars($alasan) . '</td></tr>';
+      echo '</table>';
       echo '</div>';
   }
   ?>
