@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -18,7 +17,6 @@ Route::post('login', [AuthController::class, 'login']);
  * protected routes, only accessible with valid token
  */
 Route::middleware('auth:sanctum')->group(function () {
-
     /**
      * =========3===========
      * User logout route
@@ -37,3 +35,5 @@ Route::middleware('auth:sanctum')->group(function () {
      */
     Route::put('books/{id}/borrow-return', [BooksController::class, 'borrowReturn']);
 });
+
+
