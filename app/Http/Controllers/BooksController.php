@@ -16,6 +16,8 @@ class BooksController extends Controller
      */
     public function index()
     {
+            $books = Book::all();
+            return response()->json($books, 200);
     }
 
     /**
@@ -24,7 +26,17 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-
+        $validate= $request->validate([
+            'title'=>'required|string',
+            'author'=>'required|string',
+            'published_year'=>'required|integer',
+        ]);
+        $book = Book::create([
+            'title'=>$request->title,
+            'author'=>$request->author,
+            'published_year'=>$request->published_year,
+        ]);
+        return response()->json(new BookResource($book), 201);
     }
 
     /**
@@ -33,6 +45,12 @@ class BooksController extends Controller
      */
     public function show(string $id)
     {
+        $book=Book::find($id);
+        if (! $book) {
+            return response()->json(['message' => 'Book not found'], 404);
+        }
+
+        return response()->json(new BookResource($book), 200);
 
     }
 
@@ -42,7 +60,18 @@ class BooksController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        $book=Book::find($id);
+        $validate= $request->validate([
+            'title'=>'required|string',
+            'author'=>'required|string',
+            'published_year'=>'required|integer',
+        ]);
+        $book->update([
+            'title'=>$request->title,
+            'author'=>$request->author,
+            'published_year'=>$request->published_year,
+        ]);
+        return response()->json(new BookResource($book), 200);
     }
 
     /**
@@ -51,6 +80,9 @@ class BooksController extends Controller
      */
     public function destroy(string $id)
     {
+        $book=Book::find($id);
+        $book->delete();
+        return response()->json(null,204);
     }
 
     /**
@@ -59,6 +91,10 @@ class BooksController extends Controller
      */
     public function borrowReturn(string $id)
     {
+        $book=Book::find($id);
+        $book->is_available = !$book->is_available;
+        $book->save();
+        return response()->json(new BookResource($book), 200);
 
     }
 }
